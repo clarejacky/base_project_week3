@@ -4,34 +4,47 @@
 var cityData = null;
 var cityHtml = null;
 
+var tokyoName;
+var tokyoPop;
+var tokyoArea;
+
+var newyorkName;
+var newyorkPop;
+var neworkArea;
+
+var torontoName;
+var torontoPop;
+var torontoArea;
 
 $(document).ready(function(){
-    console.log(cityData, cityHtml);
-    //$.get
-    //$.ajax
+
     $("#get-info-btn").on("click", function (){
-        if (cityHtml == null) {
             $.get('location.html', function(data) {
                 cityHtml = data;
-                console.log("it worked");
                 $(".more-stuff").append(data);
             });
-        } else {
-            console.log ("you already got it");
-        }
-
-
 
             $.get('data.json', function(data){
-                console.log("second");
-                var firstCity = data.locations[0].location;
-                $(".more-stuff").children().children().append("<p>"+firstCity+"</p>");
+                cityData = data;
+                tokyoName = data.locations[0].location;
+                tokyoPop = data.locations[0].population;
+                tokyoArea = data.locations[0].area;
+                $(".more-stuff").children().first().append("<p>"+tokyoName+"</p>");
+                $(".more-stuff").children().first().append("<p>"+tokyoPop+"</p>");
+                $(".more-stuff").children().first().append("<p>"+tokyoArea+"</p>");
+
+                tokyoName = data.locations[0].location;
+                tokyoPop = data.locations[0].population;
+                tokyoArea = data.locations[0].area;
+
             });
+
+        //best to change scope with variable
+
 
     });
 
-
-
-
-
+    $(".more-stuff").on("click", "#remove", function () {
+        $(this).parent().parent().empty();
+    });
 });
