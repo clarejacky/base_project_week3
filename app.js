@@ -15,9 +15,8 @@ function getData () {
         var locationNames = cityData.cities[i].location;
         var locationPops = cityData.cities[i].population;
         var locationAreas = cityData.cities[i].area;
-        $(".more-stuff").children().children().first().append("<p>" + locationNames + "</p>");
-        $(".more-stuff").children().children().first().append("<p>" + locationPops + "</p>");
-        $(".more-stuff").children().children().first().append("<p>" + locationAreas + "</p>");
+        $(".more-stuff").children().children().first().append("<div class='city'><p>" + locationNames + "</p><p>" + locationPops + "</p><p>" + locationAreas + "</p><div class='remove'><button id='remove' class='btn btn-info'>Remove</button></div></div>");
+
 
     }
 }
@@ -40,8 +39,8 @@ $(document).ready(function(){
         });
 
 
-    $(".more-stuff").on("click", "#remove", function () {
-        $(this).closest().parent().empty();
+    $(".more-stuff").on("click", ".remove", function () {
+        $(this).parent().empty();
     });
 });
 
